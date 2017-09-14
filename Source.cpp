@@ -6,7 +6,7 @@ using namespace std;
 void output(int a[], int size);
 void insertionSort(int *, int size);
 void quickSort(int arr[], int left, int right);
-int main()
+void main()
 {
 	int menu, n;
 	int *A = new int[0];
