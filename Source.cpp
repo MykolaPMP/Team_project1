@@ -5,7 +5,6 @@ using namespace std;
 
 void output(int a[], int size);
 void initialization(int a[], int& size);
-void copy(int a[], int r[], int size);
 
 void main()
 {
@@ -24,6 +23,7 @@ void main()
 	cout << "6.End of work" << endl;
 
 	initialization(A,n);
+	R = new int[n];
 
 	do
 	{
@@ -32,7 +32,11 @@ void main()
 
 		if (menu <= 5 && menu >= 1)
 		{
-			copy(A, R, n);
+			for (int i = 0; i < n; ++i)
+				{
+					cout << i;
+					R[i] = A[i];
+				}
 			cout << "Before sorting" << endl;
 			output(A, n);
 			start_time = clock();
@@ -121,13 +125,5 @@ void initialization(int a[], int& size)
 		{
 			a[i] = rand();
 		}
-	}
-}
-void copy(int a[], int r[], int size) 
-{
-	r = new int[size];
-	for (int i = 0; i < size; ++i)
-	{
-		r[i] = a[i];
 	}
 }
