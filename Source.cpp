@@ -4,10 +4,12 @@
 using namespace std;
 
 void output(int a[], int size);
+void insertionSort(int *, int size);
+
 
 void main()
 {
-	int menu,n;
+	int menu, n;
 	int *A = new int[0];
 	int *R = new int[0];
 	double start_time, end_time;
@@ -16,7 +18,7 @@ void main()
 	cout << "Menu:" << endl;
 	cout << "1." << endl;
 	cout << "2." << endl;
-	cout << "3." << endl;
+	cout << "3. Insertion sort" << endl;
 	cout << "4." << endl;
 	cout << "5." << endl;
 	cout << "6.End of work" << endl;
@@ -56,9 +58,9 @@ void main()
 		if (menu <= 5 && menu >= 1)
 		{
 			for (int i = 0; i < n; ++i)
-				{
-					R[i] = A[i];
-				}
+			{
+				R[i] = A[i];
+			}
 			cout << "Before sorting" << endl;
 			output(A, n);
 			start_time = clock();
@@ -77,7 +79,8 @@ void main()
 		}
 		case 3:
 		{
-
+			cout << "Insertion sort" << endl;
+			insertionSort(R, n); 
 			break;
 		}
 		case 4:
@@ -102,7 +105,7 @@ void main()
 			break;
 		}
 		}
-		if (menu <= 5 && menu >= 1) 
+		if (menu <= 5 && menu >= 1)
 		{
 			end_time = clock();
 			cout << "After sorting" << endl;
@@ -122,3 +125,20 @@ void output(int a[], int size)
 	}
 	cout << endl;
 }
+
+void insertionSort(int *array, int size)
+{
+	int temp, item;
+	for (int i = 1; i < size; i++)
+	{
+		temp = array[i];
+		item = i - 1;
+		while (item >= 0 && array[item] > temp)
+		{
+			array[item + 1] = array[item];
+			array[item] = temp;
+			item--;
+		}
+	}
+}
+
