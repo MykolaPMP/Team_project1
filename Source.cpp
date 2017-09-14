@@ -119,8 +119,9 @@ void main()
 		if (menu <= 5 && menu >= 1)
 		{
 			end_time = clock();
-			cout << "After sorting" << endl;
+			cout << "After sorting : ";
 			output(R, n);
+			cout << endl;
 			cout << "And it was done in " << end_time / CLOCKS_PER_SEC - start_time / CLOCKS_PER_SEC << endl;
 		}
 	} while (menu != 6);
