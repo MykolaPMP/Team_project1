@@ -8,7 +8,7 @@ void Merge(int A[], int l, int m, int r, int size);
 void MergeSort(int A[], int left, int right, int size);
 void insertionSort(int *, int size);
 void quickSort(int arr[], int left, int right);
-
+void bubblesort(int arr[],int n)
 
 void main()
 {
@@ -23,7 +23,7 @@ void main()
 	cout << "1.Merge_sort" << endl;
 	cout << "2.Quick sort" << endl;
 	cout << "3.Insertion sort" << endl;
-	cout << "4." << endl;
+	cout << "4.Bubble sort" << endl;
 	cout << "5." << endl;
 	cout << "6.End of work" << endl;
 
@@ -92,7 +92,8 @@ void main()
 		}
 		case 4:
 		{
-
+			cout <<"Bubble sort" << endl;
+			bubblesort(R, n);
 			break;
 		}
 		case 5:
@@ -232,3 +233,23 @@ void quickSort(int arr[], int left, int right)
 		}
 	}
 }
+void bubbleSort(int arr[], int n);
+	{
+		bool change = true; 
+		int j = 0;           
+		int i = 0;           
+		int tmp;
+		while (change) {       
+			change = false;   
+			j++;                  
+		for (i = 0; i < n - j; i++) {
+			if (arr[i] > arr[i + 1]) {
+					tmp = arr[i];         
+					arr[i] = arr[i + 1];  
+					arr[i + 1] = tmp;    
+					change = true;       
+										 
+				}
+			}
+		}
+	}
