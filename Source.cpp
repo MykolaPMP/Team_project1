@@ -4,8 +4,11 @@
 using namespace std;
 
 void output(int a[], int size);
+void Merge(int A[], int l, int m, int r, int size);
+void MergeSort(int A[], int left, int right, int size);
 void insertionSort(int *, int size);
 void quickSort(int arr[], int left, int right);
+
 
 void main()
 {
@@ -16,7 +19,8 @@ void main()
 	srand(time(NULL));
 
 	cout << "Menu:" << endl;
-	cout << "1." << endl;
+
+	cout << "1.Merge_sort" << endl;
 	cout << "2.Quick sort" << endl;
 	cout << "3.Insertion sort" << endl;
 	cout << "4." << endl;
@@ -27,14 +31,13 @@ void main()
 	cout << "Size of your vector ";
 	cin >> n;
 
-	cout << "Random vector? ";
+	cout << "Enter 1 , to randomize vector ";
 	cin >> check;
 	A = new int[n];
 
 	if (check != 1)
 	{
-		cout << "Please input your vector" << endl;
-
+		cout << "Please input your vector " << endl;
 		for (int i = 0; i < n; ++i)
 		{
 			cin >> A[i];
@@ -52,7 +55,7 @@ void main()
 
 	do
 	{
-		cout << "Menu item? ";
+		cout << "Choose Menu item ";
 		cin >> menu;
 
 		if (menu <= 5 && menu >= 1)
@@ -61,15 +64,17 @@ void main()
 			{
 				R[i] = A[i];
 			}
-			cout << "Before sorting" << endl;
+      
+			cout << "Before sorting : ";
 			output(A, n);
+			cout << endl;
 			start_time = clock();
 		}
 		switch (menu)
 		{
 		case 1:
 		{
-
+			MergeSort(R, 0, n - 1, n);
 			break;
 		}
 		case 2:
@@ -126,7 +131,61 @@ void output(int a[], int size)
 	}
 	cout << endl;
 }
+void Merge(int A[], int l, int m, int r, int size)
+{
+	int *B = new int[size];
+	int i = l, j = m + 1, k = l;
 
+	while (i <= m &&j <= r)
+	{
+		if (A[i] <= A[j])
+		{
+			B[k] = A[i];
+			++i;
+		}
+		else
+		{
+			B[k] = A[j];
+			++j;
+		}
+		++k;
+	}
+
+	while (i <= m)
+	{
+		B[k] = A[i];
+		++i;
+		++k;
+	}
+
+	while (j <= r)
+	{
+		B[k] = A[j];
+		++j;
+		++k;
+	}
+
+	for (int z = l; z <= r; ++z)
+	{
+		A[z] = B[z];
+	}
+  
+	delete[] B;
+}
+void MergeSort(int A[], int left, int right, int size)
+{
+	if (right - left < 1)
+	{
+		return;
+	}
+	int mid = (right + left) / 2;
+	if (right - left > 1)
+	{
+		MergeSort(A, left, mid, size);
+		MergeSort(A, mid + 1, right, size);
+	}
+	Merge(A, left, mid, right, size);
+}
 void insertionSort(int *array, int size)
 {
 	int temp, item;
@@ -161,9 +220,8 @@ void quickSort(int arr[], int left, int right) {
 			arr[j] = tmp;
 			i++;
 			j--;
-		}
-	}
-	if (left < j) 
+    }
+  if (left < j) 
 	{
 		quickSort(arr, left, j);
 	}
@@ -172,3 +230,4 @@ void quickSort(int arr[], int left, int right) {
 		quickSort(arr, i, right);
 	}
 }
+      
