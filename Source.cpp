@@ -5,7 +5,7 @@ using namespace std;
 
 void output(int a[], int size);
 void insertionSort(int *, int size);
-
+void quickSort(int arr[], int left, int right);
 
 void main()
 {
@@ -17,8 +17,8 @@ void main()
 
 	cout << "Menu:" << endl;
 	cout << "1." << endl;
-	cout << "2." << endl;
-	cout << "3. Insertion sort" << endl;
+	cout << "2.Quick sort" << endl;
+	cout << "3.Insertion sort" << endl;
 	cout << "4." << endl;
 	cout << "5." << endl;
 	cout << "6.End of work" << endl;
@@ -74,7 +74,8 @@ void main()
 		}
 		case 2:
 		{
-
+      cout << "Quick sort" << endl;
+			quickSort(R, 0, n - 1);
 			break;
 		}
 		case 3:
@@ -142,3 +143,32 @@ void insertionSort(int *array, int size)
 	}
 }
 
+void quickSort(int arr[], int left, int right) {
+	int i = left, j = right;
+	int tmp;
+	int mid = arr[(left + right) / 2];
+
+	while (i <= j) 
+	{
+		while (arr[i] < mid)
+			i++;
+		while (arr[j] > mid)
+			j--;
+		if (i <= j) 
+		{
+			tmp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = tmp;
+			i++;
+			j--;
+		}
+	}
+	if (left < j) 
+	{
+		quickSort(arr, left, j);
+	}
+	if (i < right) 
+	{
+		quickSort(arr, i, right);
+	}
+}
