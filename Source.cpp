@@ -4,10 +4,13 @@
 using namespace std;
 
 void output(int a[], int size);
+void insertionSort(int *, int size);
+void headlargest(int a[], int n, int i);
+void pyramidsort(int a[], int n);
 
 void main()
 {
-	int menu,n;
+	int menu, n;
 	int *A = new int[0];
 	int *R = new int[0];
 	double start_time, end_time;
@@ -16,9 +19,9 @@ void main()
 	cout << "Menu:" << endl;
 	cout << "1." << endl;
 	cout << "2." << endl;
-	cout << "3." << endl;
+	cout << "3.Insertion sort" << endl;
 	cout << "4." << endl;
-	cout << "5." << endl;
+	cout << "5.Pyramid sort" << endl;
 	cout << "6.End of work" << endl;
 
 	int check;
@@ -56,9 +59,9 @@ void main()
 		if (menu <= 5 && menu >= 1)
 		{
 			for (int i = 0; i < n; ++i)
-				{
-					R[i] = A[i];
-				}
+			{
+				R[i] = A[i];
+			}
 			cout << "Before sorting" << endl;
 			output(A, n);
 			start_time = clock();
@@ -77,7 +80,8 @@ void main()
 		}
 		case 3:
 		{
-
+			cout << "Insertion sort" << endl;
+			insertionSort(R, n);
 			break;
 		}
 		case 4:
@@ -87,7 +91,8 @@ void main()
 		}
 		case 5:
 		{
-
+			cout << "Pyramid sort" << endl;
+			pyramidsort(R, n);
 			break;
 		}
 		case 6:
@@ -102,7 +107,7 @@ void main()
 			break;
 		}
 		}
-		if (menu <= 5 && menu >= 1) 
+		if (menu <= 5 && menu >= 1)
 		{
 			end_time = clock();
 			cout << "After sorting" << endl;
@@ -121,4 +126,51 @@ void output(int a[], int size)
 		cout << a[i] << ' ';
 	}
 	cout << endl;
+}
+void insertionSort(int *array, int size)
+{
+	int temp, item;
+	for (int i = 1; i < size; i++)
+	{
+		temp = array[i];
+		item = i - 1;
+		while (item >= 0 && array[item] > temp)
+		{
+			array[item + 1] = array[item];
+			array[item] = temp;
+			item--;
+		}
+	}
+}
+void headlargest(int a[], int n, int i)
+{
+	int larg = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
+	if (l<n && a[l]>a[larg])
+	{
+		larg = l;
+	}
+	if (r<n && a[r]>a[larg])
+	{
+		larg = r;
+	}
+	if (larg != i)
+	{
+		swap(a[i], a[larg]);
+		headlargest(a, n, larg);
+	}
+}
+void pyramidsort(int a[], int n)
+{
+	for (int i = n / 2 - 1; i >= 0; --i)
+	{
+		headlargest(a, n, i);
+	}
+
+	for (int i = n - 1; i >= 0; --i)
+	{
+		swap(a[0], a[i]);
+		headlargest(a, i, 0);
+	}
 }
