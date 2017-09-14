@@ -4,7 +4,6 @@
 using namespace std;
 
 void output(int a[], int size);
-void initialization(int a[], int& size);
 
 void main()
 {
@@ -22,7 +21,31 @@ void main()
 	cout << "5." << endl;
 	cout << "6.End of work" << endl;
 
-	initialization(A,n);
+	int check;
+	cout << "Size of your vector ";
+	cin >> n;
+
+	cout << "Random vector? ";
+	cin >> check;
+	A = new int[n];
+
+	if (check != 1)
+	{
+		cout << "Please input your vector" << endl;
+
+		for (int i = 0; i < n; ++i)
+		{
+			cin >> A[i];
+		}
+	}
+	else
+	{
+		for (int i = 0; i < n; ++i)
+		{
+			A[i] = rand();
+		}
+	}
+
 	R = new int[n];
 
 	do
@@ -34,7 +57,6 @@ void main()
 		{
 			for (int i = 0; i < n; ++i)
 				{
-					cout << i;
 					R[i] = A[i];
 				}
 			cout << "Before sorting" << endl;
@@ -99,31 +121,4 @@ void output(int a[], int size)
 		cout << a[i] << ' ';
 	}
 	cout << endl;
-}
-void initialization(int a[], int& size)
-{
-	int check;
-	cout << "Size of your vector ";
-	cin >> size;
-
-	cout << "Random vector? ";
-	cin >> check;
-	a = new int[size];
-
-	if (check == 0)
-	{
-		cout << "Please input your vector" << endl;
-
-		for (int i = 0; i < size; ++i)
-		{
-			cin >> a[i];
-		}
-	}
-	else
-	{
-		for (int i = 0; i < size; ++i)
-		{
-			a[i] = rand();
-		}
-	}
 }
