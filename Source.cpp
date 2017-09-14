@@ -6,6 +6,7 @@ using namespace std;
 void output(int a[], int size);
 void insertionSort(int *, int size);
 void quickSort(int arr[], int left, int right);
+
 void main()
 {
 	int menu, n;
@@ -16,8 +17,8 @@ void main()
 
 	cout << "Menu:" << endl;
 	cout << "1." << endl;
-	cout << "2." << endl;
-	cout << "3." << endl;
+	cout << "2.Quick sort" << endl;
+	cout << "3.Insertion sort" << endl;
 	cout << "4." << endl;
 	cout << "5." << endl;
 	cout << "6.End of work" << endl;
@@ -73,12 +74,14 @@ void main()
 		}
 		case 2:
 		{
+      cout << "Quick sort" << endl;
 			quickSort(R, 0, n - 1);
 			break;
 		}
 		case 3:
 		{
-			insertionSort(R, n);
+			cout << "Insertion sort" << endl;
+			insertionSort(R, n); 
 			break;
 		}
 		case 4:
@@ -123,6 +126,7 @@ void output(int a[], int size)
 	}
 	cout << endl;
 }
+
 void insertionSort(int *array, int size)
 {
 	int temp, item;
