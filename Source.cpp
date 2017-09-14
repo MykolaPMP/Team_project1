@@ -4,11 +4,14 @@
 using namespace std;
 
 void output(int a[], int size);
+void headlargest(int a[], int n, int i);
+void pyramidSort(int a[], int n);
 void Merge(int A[], int l, int m, int r, int size);
 void MergeSort(int A[], int left, int right, int size);
 void insertionSort(int *, int size);
 void quickSort(int arr[], int left, int right);
-void bubblesort(int arr[],int n)
+void bubbleSort(int arr[],int n);
+
 
 void main()
 {
@@ -19,12 +22,11 @@ void main()
 	srand(time(NULL));
 
 	cout << "Menu:" << endl;
-
-	cout << "1.Merge_sort" << endl;
+	cout << "1.Merge sort" << endl;
 	cout << "2.Quick sort" << endl;
 	cout << "3.Insertion sort" << endl;
 	cout << "4.Bubble sort" << endl;
-	cout << "5." << endl;
+  cout << "5.Pyramid sort" << endl;
 	cout << "6.End of work" << endl;
 
 	int check;
@@ -93,12 +95,13 @@ void main()
 		case 4:
 		{
 			cout <<"Bubble sort" << endl;
-			bubblesort(R, n);
+			bubbleSort(R, n);
 			break;
 		}
 		case 5:
 		{
-
+			cout << "Pyramid sort" << endl;
+			pyramidSort(R, n);
 			break;
 		}
 		case 6:
@@ -132,6 +135,38 @@ void output(int a[], int size)
 		cout << a[i] << ' ';
 	}
 	cout << endl;
+}
+void headlargest(int a[], int n, int i)
+{
+	int larg = i;
+	int l = 2 * i + 1;
+	int r = 2 * i + 2;
+	if (l<n && a[l]>a[larg])
+	{
+		larg = l;
+	}
+	if (r<n && a[r]>a[larg])
+	{
+		larg = r;
+	}
+	if (larg != i)
+	{
+		swap(a[i], a[larg]);
+		headlargest(a, n, larg);
+	}
+}
+void pyramidSort(int a[], int n)
+{
+	for (int i = n / 2 - 1; i >= 0; --i)
+	{
+		headlargest(a, n, i);
+	}
+
+	for (int i = n - 1; i >= 0; --i)
+	{
+		swap(a[0], a[i]);
+		headlargest(a, i, 0);
+	}
 }
 void Merge(int A[], int l, int m, int r, int size)
 {
@@ -233,23 +268,26 @@ void quickSort(int arr[], int left, int right)
 		}
 	}
 }
-void bubbleSort(int arr[], int n);
+void bubbleSort(int arr[], int n)
 	{
 		bool change = true; 
 		int j = 0;           
 		int i = 0;           
 		int tmp;
-		while (change) {       
+		while (change) 
+    {       
 			change = false;   
 			j++;                  
-		for (i = 0; i < n - j; i++) {
-			if (arr[i] > arr[i + 1]) {
+		for (i = 0; i < n - j; i++) 
+    {
+			if (arr[i] > arr[i + 1]) 
+      {
 					tmp = arr[i];         
 					arr[i] = arr[i + 1];  
 					arr[i + 1] = tmp;    
-					change = true;       
-										 
+					change = true;       							 
 				}
 			}
 		}
 	}
+
