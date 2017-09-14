@@ -8,6 +8,8 @@ void insertionSort(int *, int size);
 void headlargest(int a[], int n, int i);
 void pyramidsort(int a[], int n);
 
+
+
 void main()
 {
 	int menu, n;
@@ -87,6 +89,7 @@ void main()
 		case 4:
 		{
 
+
 			break;
 		}
 		case 5:
@@ -142,6 +145,114 @@ void insertionSort(int *array, int size)
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void headlargest(int a[], int n, int i)
 {
 	int larg = i;
