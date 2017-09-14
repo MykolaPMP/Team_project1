@@ -6,6 +6,7 @@ using namespace std;
 void output(int a[], int size);
 void insertionSort(int *, int size);
 
+
 void main()
 {
 	int menu, n;
@@ -124,6 +125,7 @@ void output(int a[], int size)
 	}
 	cout << endl;
 }
+
 void insertionSort(int *array, int size)
 {
 	int temp, item;
@@ -139,3 +141,4 @@ void insertionSort(int *array, int size)
 		}
 	}
 }
+
