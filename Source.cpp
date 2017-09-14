@@ -64,7 +64,7 @@ void main()
 			{
 				R[i] = A[i];
 			}
-      
+
 			cout << "Before sorting : ";
 			output(A, n);
 			cout << endl;
@@ -74,19 +74,20 @@ void main()
 		{
 		case 1:
 		{
+			cout << "Merge sort" << endl;
 			MergeSort(R, 0, n - 1, n);
 			break;
 		}
 		case 2:
 		{
-      cout << "Quick sort" << endl;
+			cout << "Quick sort" << endl;
 			quickSort(R, 0, n - 1);
 			break;
 		}
 		case 3:
 		{
 			cout << "Insertion sort" << endl;
-			insertionSort(R, n); 
+			insertionSort(R, n);
 			break;
 		}
 		case 4:
@@ -102,7 +103,7 @@ void main()
 		case 6:
 		{
 			delete[] A; delete[] R;
-			cout << "Thanks for choosing our product." << endl;
+			cout << "Thanks for choosing our product. ^==^" << endl;
 			break;
 		}
 		default:
@@ -169,7 +170,7 @@ void Merge(int A[], int l, int m, int r, int size)
 	{
 		A[z] = B[z];
 	}
-  
+
 	delete[] B;
 }
 void MergeSort(int A[], int left, int right, int size)
@@ -201,33 +202,33 @@ void insertionSort(int *array, int size)
 		}
 	}
 }
-
-void quickSort(int arr[], int left, int right) {
+void quickSort(int arr[], int left, int right)
+{
 	int i = left, j = right;
 	int tmp;
 	int mid = arr[(left + right) / 2];
 
-	while (i <= j) 
+	while (i <= j)
 	{
 		while (arr[i] < mid)
 			i++;
 		while (arr[j] > mid)
 			j--;
-		if (i <= j) 
+		if (i <= j)
 		{
 			tmp = arr[i];
 			arr[i] = arr[j];
 			arr[j] = tmp;
 			i++;
 			j--;
-    }
-  if (left < j) 
-	{
-		quickSort(arr, left, j);
-	}
-	if (i < right) 
-	{
-		quickSort(arr, i, right);
+		}
+		if (left < j)
+		{
+			quickSort(arr, left, j);
+		}
+		if (i < right)
+		{
+			quickSort(arr, i, right);
+		}
 	}
 }
-      
