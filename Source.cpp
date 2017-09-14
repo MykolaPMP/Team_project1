@@ -4,8 +4,8 @@
 using namespace std;
 
 void output(int a[], int size);
-void initialization(int a[], int& size);
-
+void Merge(int A[], int l, int m, int r, int size);
+void MergeSort(int A[], int left, int right, int size);
 void main()
 {
 	int menu, n;
@@ -15,96 +15,61 @@ void main()
 	srand(time(NULL));
 
 	cout << "Menu:" << endl;
-	cout << "1." << endl;
+	cout << "1.Merge_sort" << endl;
 	cout << "2." << endl;
 	cout << "3." << endl;
 	cout << "4." << endl;
 	cout << "5." << endl;
 	cout << "6.End of work" << endl;
 
-	initialization(A, n);
+	int check;
+	cout << "Size of your vector ";
+	cin >> n;
+
+	cout << "Enter 1 , to randomize vector  ";
+	cin >> check;
+	A = new int[n];
+
+	if (check != 1)
+	{
+		cout << "Please input your vector " << endl;
+
+		for (int i = 0; i < n; ++i)
+		{
+			cin >> A[i];
+		}
+	}
+	else
+	{
+		for (int i = 0; i < n; ++i)
+		{
+			A[i] = rand();
+		}
+	}
+
 	R = new int[n];
 
 	do
 	{
-		cout << "Choose Menu item  ";
+		cout << "Choose Menu item ";
 		cin >> menu;
 
 		if (menu <= 5 && menu >= 1)
 		{
 			for (int i = 0; i < n; ++i)
 			{
-				cout << i;
 				R[i] = A[i];
 			}
-			cout << "Before sorting :  " ;
+			cout << "Before sorting : ";
 			output(A, n);
+			cout << endl;
 			start_time = clock();
 		}
 		switch (menu)
 		{
 		case 1:
 		{
-			int *b = new int[0];
-			copy(A, b, n);
-			int  c;
-			int m = n / 2;
-			for (int i = 0; i<m - 1; i++)
-			{
-				for (int j = 0; j<m - i - 1; j++)
-				{
-					if (b[j]>b[j + 1]) {
-						c = b[j];
-						b[j] = b[j + 1];
-						b[j + 1] = c;
-					}
-				}
-			}
-			for (int i = m; i<n - 1; i++) {
-				for (int j = m; j<n - (i - m) - 1; j++)
-				{
-					if (b[j]>b[j + 1]) {
-						c = b[j];
-						b[j] = b[j + 1];
-						b[j + 1] = c;
-					}
-				}
-			}
-			for (int i = 0; i<n; cout << b[i] << ends, i++);
-			cout << endl;
-			int l = 0, r = m, k = 0;
-
-			while (k<n)
-			{
-				if (l<m - 1 && r<m)
-				{
-					if (b[l]<b[r])
-					{
-						R[k] = b[l];
-						++l;
-					}
-					else
-					{
-						R[k] = b[r]; ++r;
-					}
-				}
-				else
-				{
-					if (l<m - 1)
-					{
-						R[k] = b[l];
-						l++;
-					}
-					else
-					{
-						R[k] = b[r];
-						r++;
-					}
-				}
-				k++;
-			}
-
-			delete[] b;
+			MergeSort(R, 0, n - 1, n);
 			break;
 		}
 		case 2:
@@ -130,12 +95,12 @@ void main()
 		case 6:
 		{
 			delete[] A; delete[] R;
-			cout << "Thanks for choosing our product ^.^ " << endl;
+			cout << "Thanks for choosing our product." << endl;
 			break;
 		}
 		default:
 		{
-			cout << "Please input proper value " << endl;
+			cout << "Please input proper value" << endl;
 			break;
 		}
 		}
@@ -144,7 +109,7 @@ void main()
 			end_time = clock();
 			cout << "After sorting" << endl;
 			output(R, n);
-			cout << "And it was done in " << end_time / CLOCKS_PER_SEC - start_time / CLOCKS_PER_SEC << " sec ";
+			cout << "And it was done in " << end_time / CLOCKS_PER_SEC - start_time / CLOCKS_PER_SEC << endl;
 		}
 	} while (menu != 6);
 
@@ -159,30 +124,58 @@ void output(int a[], int size)
 	}
 	cout << endl;
 }
-void initialization(int a[], int& size)
+void Merge(int A[], int l, int m, int r, int size)
 {
-	int check;
-	cout << "Size of your vector ";
-	cin >> size;
+	int *B = new int[size];
+	int i = l, j = m + 1, k = l;
 
-	cout << "Enter 1 , to randomize vector ";
-	cin >> check;
-	a = new int[size];
-
-	if (check == 0)
+	while (i <= m &&j <= r)
 	{
-		cout << "Please input your vector" << endl;
+		if (A[i] <= A[j])
+		{
+			B[k] = A[i];
+			++i;
+		}
+		else
+		{
+			B[k] = A[j];
+			++j;
+		}
+		++k;
+	}
 
-		for (int i = 0; i < size; ++i)
-		{
-			cin >> a[i];
-		}
-	}
-	else
+	while (i <= m)
 	{
-		for (int i = 0; i < size; ++i)
-		{
-			a[i] = rand();
-		}
+		B[k] = A[i];
+		++i;
+		++k;
 	}
+
+	while (j <= r)
+	{
+		B[k] = A[j];
+		++j;
+		++k;
+	}
+
+	for (int z = l; z <= r; ++z)
+	{
+		A[z] = B[z];
+	}
+
+	delete[] B;
+}
+void MergeSort(int A[], int left, int right, int size)
+{
+	if (right - left < 1)
+	{
+		return;
+	}
+	int mid = (right + left) / 2;
+	if (right - left > 1)
+	{
+		MergeSort(A, left, mid, size);
+		MergeSort(A, mid + 1, right, size);
+	}
+	Merge(A, left, mid, right, size);
 }
